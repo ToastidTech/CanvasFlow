@@ -396,11 +396,53 @@
     100%{ opacity:1; transform:translateY(0); }
   }
 
-  /* ===== RESPONSIVE ===== */
+  /* ===== RESPONSIVE — MOBILE ===== */
   @media (max-width: 768px){
-    #properties{width:200px;}
-    #templates-panel{width:180px;}
-    #topbar .brand span.tagline{display:none;}
+
+    #topbar{ padding:8px 10px; }
+    #topbar .brand{ font-size:1rem; }
+    #topbar .brand span.tagline{ display:none; }
+    #topbar .brand img{ height:22px; width:22px; }
+    .btn{ padding:6px 10px; font-size:.78rem; }
+    .btn-gold{ padding:6px 10px; font-size:.78rem; }
+    .btn-icon{ width:32px; height:32px; font-size:.95rem; }
+
+    #trial-banner{ font-size:.72rem; padding:5px 8px; }
+
+    #main{ flex-direction:column; overflow:hidden; }
+
+    #toolbar{
+      width:100%;
+      height:48px;
+      flex-direction:row;
+      justify-content:center;
+      padding:0 8px;
+      border-right:none;
+      border-bottom:1px solid #2a3a5c;
+      overflow-x:auto;
+      overflow-y:hidden;
+      flex-shrink:0;
+      gap:6px;
+    }
+    #toolbar hr{ display:none; }
+
+    #canvas-area{
+      flex:1;
+      padding:10px;
+      overflow:auto;
+    }
+
+    #canvas-wrap{
+      transform-origin: top center;
+    }
+
+    #properties{ display:none; }
+
+    #templates-panel{
+      width:100%;
+      left:0;
+      top:0;
+    }
   }
 </style>
 </head>
@@ -549,4 +591,3 @@
 </script>
 </body>
 </html>
-
