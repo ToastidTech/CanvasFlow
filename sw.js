@@ -7,7 +7,7 @@
    returning users will keep loading the old cached version.
    ============================================================ */
 
-const CACHE_VERSION = 'canvasflow-v2';
+const CACHE_VERSION = 'canvasflow-v3';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -74,4 +74,3 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
-
