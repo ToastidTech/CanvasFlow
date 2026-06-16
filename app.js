@@ -820,3 +820,22 @@ function init(){
 
 init();
 
+/* ===================== MOBILE CANVAS SCALING ===================== */
+function scaleCanvasToFit(){
+  if(window.innerWidth > 768) {
+    document.getElementById('canvas-wrap').style.transform = '';
+    return;
+  }
+  const area = document.getElementById('canvas-area');
+  const availW = area.clientWidth - 20;
+  const scale = Math.min(1, availW / canvas.width);
+  document.getElementById('canvas-wrap').style.transform = `scale(${scale})`;
+  document.getElementById('canvas-wrap').style.transformOrigin = 'top center';
+  // set explicit height so the area scrolls correctly
+  document.getElementById('canvas-wrap').style.marginBottom = `${canvas.height * scale - canvas.height}px`;
+}
+
+window.addEventListener('resize', scaleCanvasToFit);
+document.getElementById('canvas-size').addEventListener('change', () => setTimeout(scaleCanvasToFit, 50));
+// run after init
+setTimeout(scaleCanvasToFit, 800);
