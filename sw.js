@@ -7,7 +7,7 @@
    returning users will keep loading the old cached version.
    ============================================================ */
 
-const CACHE_VERSION = 'canvasflow-v3';
+const CACHE_VERSION = 'canvasflow-v1';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -24,7 +24,7 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
+ll  event.waitUntil(
     caches.open(CACHE_VERSION).then((cache) => {
       return cache.addAll(ASSETS_TO_CACHE).catch(err => {
         console.warn('Some assets failed to cache:', err);
