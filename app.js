@@ -2,12 +2,13 @@
  * CANVASFLOW CREATIVE STUDIO V2
  * Dual Output Engine (Meta + YT)
  ******************************/
+
 const state = {
   mode: "both",
-  state 
-valid.validModes.(statemode))
+  validModes: ["meta", "youtube", "both"]
 };
-let mode = "both"; // meta | youtube | both
+
+let mode = state.mode; // meta | youtube | both
 
 /* ---------------------------
    CORE CREATIVE ENGINE
