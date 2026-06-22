@@ -4,7 +4,8 @@
  ******************************/
 const state = {
   mode: "both",
-  validModes: ["meta", "youtube"]
+  state 
+valid.validModes.(statemode))
 };
 let mode = "both"; // meta | youtube | both
 
