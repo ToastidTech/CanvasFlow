@@ -105,22 +105,33 @@
       <button id="youtubeBtn">YouTube Thumbnail</button>
     </div>
 
-    <!-- GENERATE -->
-    function generate() {
-  alert("GEN CLICKED");
-}
-    
+    <!-- APP UI ======================== -->
+<div class="app">
 
-    <!-- OUTPUT -->
-    <div id="output"></div>
+  <h1>Generate Visual Creatives</h1>
 
+  <!-- INPUT -->
+  <input id="prompt" type="text" placeholder="Enter your idea..." />
+
+  <!-- FORMAT SELECTORS -->
+  <div class="format-row">
+    <button id="metaBtn">Meta Feed Post</button>
+    <button id="youtubeBtn">YouTube Thumbnail</button>
   </div>
 
-  <!-- =======================
-       JS ENGINE
-  ======================== -->
-  <script src="apps.js"></script>
+  <!-- GENERATE -->
+  <button id="generateBtn">Generate</button>
 
-</body>
+  <!-- OUTPUT -->
+  <div id="output"></div>
 
-</html>
+</div>
+
+<!-- JS ======================== -->
+<script>
+  function generate() {
+    alert("GEN CLICKED");
+  }
+
+  document.getElementById("generateBtn").onclick = generate;
+</script>
