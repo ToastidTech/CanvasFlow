@@ -129,9 +129,11 @@
 
 <!-- JS ======================== -->
 <script>
-  function generate() {
-    alert("GEN CLICKED");
-  }}
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("generateBtn");
 
-  document.getElementById("generateBtn").onclick = generate;
+    btn?.addEventListener("click", () => {
+      alert("GEN CLICKED");
+    });
+  });
 </script>
