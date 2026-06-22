@@ -1,820 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0b0f14;
-  color: white;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-.app {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
-}
+  <title>CanvasFlow Creative Studio</title>
 
-input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-  margin-bottom: 10px;
-}
+  <!-- =======================
+       STYLES (NO EXTERNAL CSS YET)
+  ======================== -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070b10;
+      color: white;
+    }
 
-.format-row {
-  display: flex;
-  gap: 10px;
-  margin: 10px 0;
-}
+    .app {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
 
-button {
-  padding: 10px 14px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background: #1f6fff;
-  color: white;
-  font-weight: bold;
-}
+    h1 {
+      margin-bottom: 15px;
+    }
 
-button:hover {
-  background: #3a86ff;
-}
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 10px;
+      font-size: 16px;
+      outline: none;
+    }
 
-#output {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 12px;
-  background: #111827;
-}
+    .format-row {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0;
+    }
 
-.meta-post {
-  border-left: 4px solid #3a86ff;
-  padding-left: 10px;
-}
+    button {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 10px;
+      background: #1f6fff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.youtube-thumb {
-  border-left: 4px solid #ff0033;
-  padding-left: 10px;
-}
-</style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PulseMatrix - Command Hub</title>
-    <style>
-        :root {
-            --bg-gradient: radial-gradient(circle at center, #0d1b2a 0%, #050a12 100%);
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --neon-cyan: #00f2fe;
-            --neon-blue: #4facfe;
-            --neon-magenta: #ff007f;
-            --neon-purple: #7928ca;
-            --text-main: #ffffff;
-            --text-muted: #8a99ad;
-        }
+    button:hover {
+      background: #3a86ff;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            <div class="app">
+    #output {
+      margin-top: 20px;
+      display: grid;
+      gap: 20px;
+    }
 
-  <h1>Generate Visual Creatives</h1>
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
 
-  <!-- INPUT -->
-  <input id="prompt" type="text" placeholder="Enter your idea..." />
+    .meta-post {
+      background: #111827;
+      padding: 15px;
+      border-left: 4px solid #3a86ff;
+      border-radius: 10px;
+    }
 
-  <!-- FORMAT OPTIONS (2 BUTTONS ROW) -->
-  <div class="format-row">
-    <button id="metaBtn">Meta Feed Post</button>
-    <button id="youtubeBtn">YouTube Thumbnail</button>
-  </div>
+    .youtube-thumb {
+      background: #111;
+      padding: 15px;
+      border-left: 4px solid #ff0033;
+      border-radius: 10px;
+    }
+  </style>
 
-  <!-- GENERATE BUTTON -->
-  <button id="generateBtn">Generate</button>
-
-  <!-- OUTPUT SCREEN -->
-  <div id="output"></div>
-
-</div>
-        }
-
-        body {
-            background: var(--bg-gradient);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-
-        .ambient-glow-1 {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(0, 242, 254, 0.05) 0%, transparent 70%);
-            top: -10%;
-            left: -10%;
-            z-index: 0;
-        }
-
-        .ambient-glow-2 {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 0, 127, 0.04) 0%, transparent 70%);
-            bottom: -10%;
-            right: -10%;
-            z-index: 0;
-        }
-
-        .dashboard-container {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 1280px;
-            background: rgba(10, 15, 30, 0.7);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 40px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        }
-
-        .header-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .brand-logo {
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* BYOK Settings Panel UI Layout styles */
-        .api-panel-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .api-toggle-btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            padding: 6px 12px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: all 0.2s;
-        }
-
-        .api-toggle-btn:hover {
-            color: #fff;
-            border-color: var(--neon-cyan);
-        }
-
-        .api-input-container {
-            display: none;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0,0,0,0.4);
-            padding: 4px 8px;
-            border-radius: 12px;
-            border: 1px solid var(--glass-border);
-        }
-
-        .api-key-input {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #fff;
-            font-size: 0.8rem;
-            width: 180px;
-            padding: 4px;
-        }
-
-        .api-save-btn {
-            background: var(--neon-blue);
-            border: none;
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .header-intro {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .header-intro h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .header-intro p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        .grid-channels {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
-        }
-
-        .card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 30px 20px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .card.active {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
-            background: rgba(0, 242, 254, 0.02);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .card h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            min-height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #f1f5f9;
-        }
-
-        .card-input, .card-select {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 10px 12px;
-            color: var(--text-main);
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .card-input:focus, .card-select:focus {
-            border-color: var(--neon-blue);
-        }
-
-        .card-select option {
-            background: #0d1b2a;
-            color: #fff;
-        }
-
-        .mock-dashboard-preview {
-            width: 100%;
-            height: 110px;
-            background: rgba(0,0,0,0.4);
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.05);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .card-btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 25px;
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            margin-top: auto;
-            transition: transform 0.2s, opacity 0.2s;
-        }
-
-        .card-btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-
-        .btn-cyan { background: linear-gradient(90deg, #00c6ff, #0072ff); }
-        .btn-magenta { background: linear-gradient(90deg, #f857a6, #ff5858); }
-        .btn-purple { background: linear-gradient(90deg, #7928ca, #b800ff); }
-
-        .action-footer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .footer-status {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            letter-spacing: 0.5px;
-        }
-
-        .proceed-btn {
-            background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2));
-            border: 1px solid rgba(255,255,255,0.2);
-            color: var(--text-main);
-            padding: 16px 80px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 30px;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s;
-        }
-
-        .proceed-btn:hover {
-            background: #ffffff;
-            color: #050a12;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-        }
-
-        /* Custom Interactive Screen Modal Window Design */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 10, 18, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 100;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: #0d1b2a;
-            border: 1px solid var(--neon-cyan);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 650px;
-            padding: 30px;
-            box-shadow: 0 0 40px rgba(0, 242, 254, 0.2);
-            display: flex;
-            flex-direction: column;
-            max-height: 85vh;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 10px;
-        }
-
-        .modal-output-box {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 20px;
-            color: #f1f5f9;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            flex-grow: 1;
-            margin-bottom: 20px;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end;
-        }
-
-        .modal-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-        }
-
-        .close-modal-btn { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--glass-border); }
-        .copy-modal-btn { background: var(--neon-blue); color: white; }
-    </style>
 </head>
-    <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #070b10;
-  color: white;
-}
 
-.app {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-}
-
-input {
-  width: 100%;
-  padding: 14px;
-  border-radius: 10px;
-  border: none;
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-.format-row {
-  display: flex;
-  gap: 10px;
-  margin: 10px 0;
-}
-
-button {
-  padding: 10px 14px;
-  border: none;
-  border-radius: 10px;
-  background: #1f6fff;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #3a86ff;
-}
-
-#output {
-  margin-top: 20px;
-  display: grid;
-  gap: 20px;
-}
-
-.split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.meta-post {
-  background: #111827;
-  padding: 15px;
-  border-left: 4px solid #3a86ff;
-  border-radius: 10px;
-}
-
-.youtube-thumb {
-  background: #111;
-  padding: 15px;
-  border-left: 4px solid #ff0033;
-  border-radius: 10px;
-}
-</style>
 <body>
 
-    <div class="ambient-glow-1"></div>
-    <div class="ambient-glow-2"></div>
+  <!-- =======================
+       APP UI
+  ======================== -->
+  <div class="app">
 
-    <div class="dashboard-container">
-        
-        <!-- Navigation Header with Inline Logo & BYOK API Panel -->
-        <header class="header-nav">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <img src="logo.png" style="width: 32px; height: 32px; border-radius: 6px; object-fit: cover;" alt="Logo">
-                <div class="brand-logo" id="brandLogo">PulseMatrix</div>
-            </div>
-            
-            <div class="api-panel-wrapper">
-                <div class="api-input-container" id="apiInputContainer">
-                    <input type="password" class="api-key-input" id="apiKeyInput" placeholder="Paste Anthropic API Key...">
-                    <button class="api-save-btn" id="saveKeyBtn">Save</button>
-                </div>
-                <button class="api-toggle-btn" id="apiToggleBtn">⚙️ Anthropic Key</button>
-                <div style="color: var(--text-muted); font-size: 0.9rem;">Command Hub v1.0</div>
-            </div>
-        </header>
+    <h1>Generate Visual Creatives</h1>
 
-        <!-- Dynamic Header Message -->
-        <section class="header-intro">
-            <h1>Instant Generation & Dashboard Access</h1>
-            <p>Welcome to the all-in-one marketing command. What would you like to achieve today?</p>
-        </section>
+    <!-- INPUT -->
+    <input id="prompt" type="text" placeholder="Enter your idea..." />
 
-        <!-- Interactive Dashboard Options Matrix -->
-        <main class="grid-channels">
-            
-            <!-- Column 1: Quick Ad Script Gen -->
-            <div class="card">
-                <div class="card-icon">📝</div>
-                <h2>Quick Ad Script Gen</h2>
-                <input type="text" class="card-input" placeholder="Enter Campaign Topic..." />
-                <select class="card-select">
-                    <option value="Meta Ads">Meta Ads</option>
-                    <option value="Google Ads">Google Ads</option>
-                    <option value="TikTok Ads">TikTok Ads</option>
-                </select>
-                <button class="card-btn btn-cyan">Generate Script</button>
-            </div>
-
-            <!-- Column 2: Access Command Hub Dashboard (Active Focus Element) -->
-            <div class="card active">
-                <div class="card-icon">📊</div>
-                <h2>Access Command Hub Dashboard</h2>
-                <div class="mock-dashboard-preview">
-                    [ Analytics Live Feed ]
-                </div>
-                <button class="card-btn btn-cyan" style="margin-top: 13px;">View Dashboard</button>
-            </div>
-
-            <!-- Column 3: Craft Stopping Hooks -->
-            <div class="card">
-                <div class="card-icon">📢</div>
-                <h2>Craft Stopping Hooks</h2>
-                <select class="card-select">
-                    <option value="Instagram Reel">Instagram Reel</option>
-                    <option value="YouTube Short">YouTube Short</option>
-                </select>
-                <select class="card-select">
-                    <option value="TikTok Viral">TikTok Viral</option>
-                    <option value="Professional Corporate">Professional Corporate</option>
-                </select>
-                <button class="card-btn btn-magenta">Generate Hook</button>
-            </div>
-
-            <!-- Column 4: Generate Visual Creatives -->
-            <div class="card">
-                <div class="card-icon">🎨</div>
-                <h2>Generate Visual Creatives</h2>
-                <select class="card-select">
-                    <option value="Meta Feed Post">Meta Feed Post</option>
-                    <option value="X / Twitter Image">X / Twitter Image</option>
-                </select>
-                <select class="card-select">
-                    <option value="YouTube Thumbnail">YouTube Thumbnail</option>
-                    <option value="Pinterest Pin">Pinterest Pin</option>
-                </select>
-                <button class="card-btn btn-purple">Generate Visual</button>
-            </div>
-         
-            <!-- Column 5: Smart Content Calendar -->
-            <div class="card">
-                <div class="card-icon">📅</div>
-                <h2>Smart Content Calendar</h2>
-                <input type="text" class="card-input" placeholder="Enter Core Theme/Product...">
-                <select class="card-select">
-                    <option value="7-Day Multi-Platform Matrix">7-Day Multi-Platform Matrix</option>
-                    <option value="X / Twitter Thread Series">X / Twitter Thread Series</option>
-                    <option value="LinkedIn Thought Leadership">LinkedIn Thought Leadership</option>
-                </select>
-                <button class="card-btn" style="background: linear-gradient(135deg, #00b4db, #0083b0); color: white;">Build Schedule</button>
-            </div>
-
-            <!-- Column 6: AI Competitor Matrix -->
-            <div class="card">
-                <div class="card-icon">🛡️</div>
-                <h2>AI Competitor Matrix</h2>
-                <input type="text" class="card-input" placeholder="Enter Competitor Brand/URL...">
-                <select class="card-select">
-                    <option value="Counter-Angle Strategy">Counter-Angle Strategy</option>
-                    <option value="Market Gap Analysis">Market Gap Analysis</option>
-                    <option value="Hook Differentiation">Hook Differentiation</option>
-                </select>
-                <button class="card-btn" style="background: linear-gradient(135deg, #f12711, #f5af19); color: white;">Generate Counter-Angle</button>
-            </div>
-
-        </main>
-
-        <!-- Final Execution Footer -->
-        <footer class="action-footer">
-            <div class="footer-status">⚡ Select a specific platform to tailor your output.</div>
-            <button class="proceed-btn">Proceed</button>
-        </footer>
-
+    <!-- FORMAT SELECTORS -->
+    <div class="format-row">
+      <button id="metaBtn">Meta Feed Post</button>
+      <button id="youtubeBtn">YouTube Thumbnail</button>
     </div>
 
-    <!-- UI Overlay Display Modal Window -->
-    <div class="modal-overlay" id="outputModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle" style="color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 1px;">PulseMatrix Output</h3>
-                <span id="modalStatus" style="font-size: 0.8rem; color: var(--text-muted);"></span>
-            </div>
-            <div class="modal-output-box" id="modalOutput">Processing prompt requests...</div>
-            <div class="modal-actions">
-                <button class="modal-btn close-modal-btn" id="closeModalBtn">Dismiss</button>
-                <button class="modal-btn copy-modal-btn" id="copyModalBtn">Copy Assets</button>
-            </div>
-        </div>
-    </div>
+    <!-- GENERATE -->
+    <button id="generateBtn">Generate</button>
 
-    <script>
-        // 1. Service Worker Activation System
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('PulseMatrix Service Worker Registered!'))
-                    .catch(err => console.log('Service Worker registration failed: ', err));
-            });
-        }
+    <!-- OUTPUT -->
+    <div id="output"></div>
 
-        // 2. Local Storage API Management Logic 
-        const apiToggleBtn = document.getElementById('apiToggleBtn');
-        const apiInputContainer = document.getElementById('apiInputContainer');
-        const apiKeyInput = document.getElementById('apiKeyInput');
-        const saveKeyBtn = document.getElementById('saveKeyBtn');
+  </div>
 
-        // Check for existing key on boot load
-        if (localStorage.getItem('anthropic_api_key')) {
-            apiToggleBtn.innerText = '⚙️ Key Configured';
-            apiToggleBtn.style.borderColor = 'var(--neon-cyan)';
-        }
+  <!-- =======================
+       JS ENGINE
+  ======================== -->
+  <script src="apps.js"></script>
 
-        apiToggleBtn.addEventListener('click', () => {
-            const isVisible = apiInputContainer.style.display === 'flex';
-            apiInputContainer.style.display = isVisible ? 'none' : 'flex';
-            if (!isVisible && localStorage.getItem('anthropic_api_key')) {
-                apiKeyInput.value = localStorage.getItem('anthropic_api_key');
-            }
-        });
-
-        saveKeyBtn.addEventListener('click', () => {
-            const keyVal = apiKeyInput.value.trim();
-            if (keyVal) {
-                localStorage.setItem('anthropic_api_key', keyVal);
-                apiToggleBtn.innerText = '⚙️ Key Configured';
-                apiToggleBtn.style.borderColor = 'var(--neon-cyan)';
-                alert('🔑 Key updated locally in browser storage!');
-            } else {
-                localStorage.removeItem('anthropic_api_key');
-                apiToggleBtn.innerText = '⚙️ Anthropic Key';
-                apiToggleBtn.style.borderColor = 'var(--glass-border)';
-                alert('Key removed.');
-            }
-            apiInputContainer.style.display = 'none';
-        });
-
-        // 3. Modal Controls
-        const outputModal = document.getElementById('outputModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalOutput = document.getElementById('modalOutput');
-        const modalStatus = document.getElementById('modalStatus');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const copyModalBtn = document.getElementById('copyModalBtn');
-
-        closeModalBtn.addEventListener('click', () => { outputModal.style.display = 'none'; });
-        copyModalBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(modalOutput.innerText);
-            alert('📋 Copied output contents to clipboard!');
-        });
-
-        // 4. Secure Direct Anthropic API Request Router
-        document.addEventListener('DOMContentLoaded', () => {
-            const cardButtons = document.querySelectorAll('.grid-channels .card-btn');
-            
-            cardButtons.forEach(button => {
-                button.addEventListener('click', async (e) => {
-                    const card = e.target.closest('.card');
-                    const titleText = card.querySelector('h2').innerText;
-                    
-                    // Handle View Dashboard static path separately
-                    if (titleText.includes("COMMAND HUB DASHBOARD")) {
-                        modalTitle.innerText = "Dashboard Feed";
-                        modalStatus.innerText = "ONLINE";
-                        modalOutput.innerText = "🚀 Accessing Command Hub Engine metrics...\n\n[System Matrix Live Feed Stream Status: 100% Operational]";
-                        outputModal.style.display = 'flex';
-                        return;
-                    }
-
-                    // Pull Saved Local Token
-                    const apiKey = localStorage.getItem('anthropic_api_key');
-                    if (!apiKey) {
-                        alert('❌ Missing Key! Please click the "⚙️ Anthropic Key" button at the top right to paste your API Key before executing.');
-                        apiInputContainer.style.display = 'flex';
-                        return;
-                    }
-
-                    // Gather UI inputs
-                    const textInput = card.querySelector('.card-input');
-                    const selects = card.querySelectorAll('.card-select');
-                    
-                    let targetTopic = textInput ? textInput.value.trim() : "General Branding Strategy";
-                    let chosenOptions = [];
-                    selects.forEach(select => chosenOptions.push(select.value));
-
-                    // Show custom loading status framework
-                    modalTitle.innerText = titleText;
-                    modalStatus.innerText = "GENERATING...";
-                    modalOutput.innerText = `⚡ Contacting Claude Engine...\n\nTopic Context: "${targetTopic}"\nParameters: ${chosenOptions.join(' + ')}\n\nPlease wait, crafting your tailored marketing assets...`;
-                    outputModal.style.display = 'flex';
-
-                    // Build clean systemic formatting rules
-                    let systemInstructions = "You are an elite, performance-driven direct response marketing copywriter and strategist. Provide instantly usable, high-converting copy assets or structural outlines based on the parameters requested. Break sections down cleanly.";
-                    let structuralPrompt = `Generate marketing assets for: "${titleText}".\nTopic Context: "${targetTopic}"\nChosen Framework Settings: ${chosenOptions.join(', ')}. Please output polished copy.`;
-
-                    try {
-                        // Direct secure browser fetch call straight to Anthropic's Claude API infrastructure
-                        const response = await fetch('https://api.anthropic.com/v1/messages', {
-                            method: 'POST',
-                            headers: {
-                                'x-api-key': apiKey,
-                                'anthropic-version': '2023-06-01',
-                                'content-type': 'application/json',
-                                'anthropic-dangerous-direct-browser-access': 'true' // Activates client side browser bypass
-                            },
-                            body: JSON.stringify({
-                                model: "claude-3-5-sonnet-20240620",
-                                max_tokens: 1500,
-                                system: systemInstructions,
-                                messages: [
-                                    { role: "user", content: structuralPrompt }
-                                ]
-                            })
-                        });
-
-                        const responseData = await response.json();
-                        
-                        if (response.ok && responseData.content) {
-                            modalStatus.innerText = "COMPLETE";
-                            modalOutput.innerText = responseData.content[0].text;
-                        } else {
-                            throw new Error(responseData.error?.message || 'Connection anomaly during streaming cycle.');
-                        }
-
-                    } catch (error) {
-                        modalStatus.innerText = "ERROR";
-                        modalOutput.innerText = `⚠️ Generation Pipeline Failed.\n\nDetails: ${error.message}\n\nDouble check that your Anthropic key is entered correctly, active, and has available credits.`;
-                    }
-                });
-            });
-
-            // Footer main CTA connector
-            const proceedBtn = document.querySelector('.proceed-btn');
-            if (proceedBtn) {
-                proceedBtn.addEventListener('click', () => {
-                    modalTitle.innerText = "Command Stream Initialization";
-                    modalStatus.innerText = "READY";
-                    modalOutput.innerText = "⚡ System online. All 6 creative tools connected to Anthropic API router. Tap any parameter generation card to execute dynamic asset generation workflows.";
-                    outputModal.style.display = 'flex';
-                });
-            }
-        });
-    </script>
-    <input id="prompt" placeholder="Enter idea..." />
-
-<button id="metaBtn">Meta Feed Post</button>
-<button id="youtubeBtn">YouTube Thumbnail</button>
-
-<button id="generateBtn">Generate</button>
-
-<div id="output"></div>
 </body>
+
 </html>
