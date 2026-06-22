@@ -127,13 +127,36 @@
 
 </div>
 
-<!-- JS ======================== -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("generateBtn");
+<<script>
+document.addEventListener("DOMContentLoaded", () => {
 
-    btn?.addEventListener("click", () => {
-      alert("GEN CLICKED");
-    });
-  });
+  const generateBtn = document.getElementById("generateBtn");
+  const output = document.getElementById("output");
+  const promptInput = document.getElementById("prompt");
+
+  generateBtn.addEventListener("click", generate);
+
+  function generate() {
+
+    const prompt = promptInput.value.trim();
+
+    if (!prompt) {
+      output.innerHTML = `
+        <div class="card">
+          Please enter a prompt first.
+        </div>
+      `;
+      return;
+    }
+
+    output.innerHTML = `
+      <div class="card">
+        <h2>Creative Generated</h2>
+        <p><strong>Prompt:</strong> ${prompt}</p>
+        <p>Your generated creative will appear here.</p>
+      </div>
+    `;
+  }
+
+});
 </script>
