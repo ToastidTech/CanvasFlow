@@ -1,6 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0f14;
+  color: white;
+}
+
+.app {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.format-row {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #1f6fff;
+  color: white;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #3a86ff;
+}
+
+#output {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #111827;
+}
+
+.meta-post {
+  border-left: 4px solid #3a86ff;
+  padding-left: 10px;
+}
+
+.youtube-thumb {
+  border-left: 4px solid #ff0033;
+  padding-left: 10px;
+}
+</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PulseMatrix - Command Hub</title>
