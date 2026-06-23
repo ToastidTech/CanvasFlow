@@ -4,11 +4,10 @@
  ******************************/
 
 const state = {
-  mode: "both",
+  state.mode: "both",
   validModes: ["meta", "youtube", "both"]
 };
 
-let mode = state.mode; // meta | youtube | both
 
 /* ---------------------------
    CORE CREATIVE ENGINE
@@ -67,11 +66,11 @@ function generate() {
     html = renderMeta(data);
   }
 
-  if (mode === "youtube") {
+  if (state.mode === "youtube") {
     html = renderYouTube(data);
   }
 
-  if (mode === "both") {
+  if (state.mode === "both") {
     html = `
       <div class="split">
         ${renderMeta(data)}
@@ -86,12 +85,14 @@ function generate() {
 /* ---------------------------
    MODE SWITCHERS
 ----------------------------*/
-function setMode(newMode) {
-  if (state.validModes.includes(newMode)) {
+function setmode(newMode) {
+  if (state.validModes.includes(newMode)) 
+  {
     state.mode = newMode;
     mode = newMode;
   } else {
-    console.warn("Invalid mode:", newMode);
+    console.warn("Invalid mode:", 
+ newMode);
   }
 }
 
