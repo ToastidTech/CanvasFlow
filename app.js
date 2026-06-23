@@ -87,7 +87,12 @@ function generate() {
    MODE SWITCHERS
 ----------------------------*/
 function setMode(newMode) {
-  mode = newMode;
+  if (state.validModes.includes(newMode)) {
+    state.mode = newMode;
+    mode = newMode;
+  } else {
+    console.warn("Invalid mode:", newMode);
+  }
 }
 
 /* ---------------------------
