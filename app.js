@@ -92,7 +92,7 @@ function generate() {
   }
 
   output.innerHTML = html;
-}
+
 }
 
 /* ---------------------------
@@ -110,9 +110,7 @@ function setmode(newMode) {
 }
 
 /* ---------------------------
-   INIT
-----------------------------*/
-  document.addEventListener("DOMContentLoaded", () => {
+   --
   document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("generateBtn").onclick = generate;
 
