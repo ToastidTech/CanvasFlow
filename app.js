@@ -101,8 +101,7 @@ function generate() {
 function setmode(newMode) {
   if (state.validModes.includes(newMode)) 
   {
-    state.mode = newMode;
-    mode = newMode;
+    
   } else {
     console.warn("Invalid mode:", 
  newMode);
