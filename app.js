@@ -4,11 +4,25 @@
  ******************************/
 
 const state = {
-  state.mode: "both",
+  mode: "both",
   validModes: ["meta", "youtube", "both"]
 };
 
+const state = {
+  mode: "both",
+  validModes: ["meta", "youtube", "both"]
+};
 
+function setMode(newMode) {
+  if (state.validModes.includes(newMode)) {
+    state.mode = newMode;
+  }
+}
+
+function generate() {
+  const mode = state.mode;
+  ...
+}
 /* ---------------------------
    CORE CREATIVE ENGINE
 ----------------------------*/
