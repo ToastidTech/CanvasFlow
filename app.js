@@ -8,14 +8,11 @@ const state = {
   validModes: ["meta", "youtube", "both"]
 };
 
-const state = {
-  mode: "both",
-  validModes: ["meta", "youtube", "both"]
-};
-
 function setMode(newMode) {
   if (state.validModes.includes(newMode)) {
     state.mode = newMode;
+  } else {
+    console.warn("Invalid mode:", newMode);
   }
 }
 
@@ -73,6 +70,7 @@ function generate() {
   const output = document.getElementById("output");
 
   const data = generateCreativeCore(prompt);
+  const mode = state.mode;
 
   let html = "";
 
@@ -80,11 +78,11 @@ function generate() {
     html = renderMeta(data);
   }
 
-  if (state.mode === "youtube") {
+  if (mode === "youtube") {
     html = renderYouTube(data);
   }
 
-  if (state.mode === "both") {
+  if (mode === "both") {
     html = `
       <div class="split">
         ${renderMeta(data)}
@@ -94,6 +92,7 @@ function generate() {
   }
 
   output.innerHTML = html;
+}
 }
 
 /* ---------------------------
@@ -113,12 +112,12 @@ function setmode(newMode) {
 /* ---------------------------
    INIT
 ----------------------------*/
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("generateBtn").onclick = generate;
 
   document.getElementById("metaBtn").onclick = () => setMode("meta");
   document.getElementById("youtubeBtn").onclick = () => setMode("youtube");
 
-  // default state
   setMode("both");
 });
