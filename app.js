@@ -119,6 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("metaBtn").onclick = () => setMode("meta");
   document.getElementById("youtubeBtn").onclick = () => setMode("youtube");
 
-  // default = both
+  // default state
   setMode("both");
 });
