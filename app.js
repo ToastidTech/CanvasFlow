@@ -1,3 +1,4 @@
+
 /******************************
  * CANVASFLOW CREATIVE STUDIO V2
  * Dual Output Engine (Meta + YT)
@@ -16,10 +17,6 @@ function setMode(newMode) {
   }
 }
 
-function generate() {
-  const mode = state.mode;
-  ...
-}
 /* ---------------------------
    CORE CREATIVE ENGINE
 ----------------------------*/
@@ -96,21 +93,9 @@ function generate() {
 }
 
 /* ---------------------------
-   MODE SWITCHERS
+   EVENT BINDING
 ----------------------------*/
-function setmode(newMode) {
-  if (state.validModes.includes(newMode)) 
-  {
-    
-  } else {
-    console.warn("Invalid mode:", 
- newMode);
-  }
-}
-
-/* ---------------------------
-   --
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("generateBtn").onclick = generate;
 
   document.getElementById("metaBtn").onclick = () => setMode("meta");
