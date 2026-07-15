@@ -1,6 +1,6 @@
 
 /******************************
- * CANVASFLOW CREATIVE STUDIO V2
+ * CANVAS FLOW CREATIVE STUDIO
  * Dual Output Engine (Meta + YT)
  ******************************/
 
