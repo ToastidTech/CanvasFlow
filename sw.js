@@ -1,5 +1,5 @@
 // ===============================
-// CanvasFlow Service Worker (CLEAN)
+// Canvas Flow Service Worker (CLEAN)
 // Isolated cache, no cross-app bleed
 // ===============================
 
