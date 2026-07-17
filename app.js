@@ -305,25 +305,8 @@ function generate() {
       `;
 
       break;
-case "all":
 
-  html = `
-  <div class="split">
-
-    ${renderMeta(data)}
-    ${renderInstagram(data)}
-    ${renderTikTok(data)}
-    ${renderYouTube(data)}
-
-  </div>
-  `;
-
-  break;
-  }
-
-  output.innerHTML = html;
-
-}
+    }
       
 /* ---------------------------
    INITIALIZATION
