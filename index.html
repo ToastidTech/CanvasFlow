@@ -7,9 +7,8 @@
 
   <title>Canvas Flow AI | AI Design Studio</title>
 
-  <!-- =======================
-       STYLES (NO EXTERNAL CSS YET)
-  ======================== -->
+  <link rel="manifest" href="manifest.json">
+
   <style>
     body {
       margin: 0;
@@ -64,24 +63,25 @@
       gap: 20px;
     }
 
-    .split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+    .card {
+      background: #111827;
+      padding: 20px;
+      border-radius: 12px;
     }
 
     .meta-post {
-      background: #111827;
-      padding: 15px;
       border-left: 4px solid #3a86ff;
-      border-radius: 10px;
     }
 
     .youtube-thumb {
-      background: #111;
-      padding: 15px;
       border-left: 4px solid #ff0033;
-      border-radius: 10px;
+    }
+
+    .admin-box {
+      margin-top: 30px;
+      padding: 15px;
+      background: #111827;
+      border-radius: 12px;
     }
   </style>
 
@@ -89,75 +89,144 @@
 
 <body>
 
-  <!-- =======================
-       APP UI
-  ======================== -->
-  <div class="app">
-
-    <h1>Generate Visual Creatives</h1>
-
-    <!-- INPUT -->
-    <input id="prompt" type="text" placeholder="Enter your idea..." />
-
-    <!-- FORMAT SELECTORS -->
-    <div class="format-row">
-      <button id="metaBtn">Meta Feed Post</button>
-      <button id="youtubeBtn">YouTube Thumbnail</button>
-    </div>
-
-    <!-- APP UI ======================== -->
 <div class="app">
 
-  <h1>Generate Visual Creatives</h1>
+  <h1>Canvas Flow AI</h1>
+  <p>AI Design Studio</p>
 
-  <!-- INPUT -->
   <input id="prompt" type="text" placeholder="Enter your idea..." />
 
-  <!-- FORMAT SELECTORS -->
   <div class="format-row">
     <button id="metaBtn">Meta Feed Post</button>
     <button id="youtubeBtn">YouTube Thumbnail</button>
   </div>
 
-  <!-- GENERATE -->
   <button id="generateBtn">Generate</button>
 
-  <!-- OUTPUT -->
   <div id="output"></div>
+
+
+  <div class="admin-box">
+    <h3>Admin Unlock</h3>
+    <input id="adminCode" type="password" placeholder="Enter admin code">
+    <button id="unlockBtn">Unlock</button>
+    <p id="adminStatus"></p>
+  </div>
+
 
 </div>
 
-<<script>
-  console.log("NEW SCRIPT LOADED");
+
+<script>
+
+const ADMIN_CODE = "TST2026";
+
+let selectedFormat = "Meta Feed Post";
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const generateBtn = document.getElementById("generateBtn");
   const output = document.getElementById("output");
-  const promptInput = document.getElementById("prompt");
 
-  generateBtn.addEventListener("click", generate);
+  document.getElementById("metaBtn").onclick = () => {
+    selectedFormat = "Meta Feed Post";
+  };
 
-  function generate() {
+  document.getElementById("youtubeBtn").onclick = () => {
+    selectedFormat = "YouTube Thumbnail";
+  };
 
-    const prompt = promptInput.value.trim();
+
+  generateBtn.onclick = () => {
+
+    const prompt = document
+      .getElementById("prompt")
+      .value
+      .trim();
+
 
     if (!prompt) {
+
       output.innerHTML = `
-        <div class="card">
-          Please enter a prompt first.
-        </div>
+      <div class="card">
+      Please enter a prompt first.
+      </div>
       `;
+
       return;
     }
 
+
     output.innerHTML = `
-      <div class="card">
-        <h2>Creative Generated</h2>
-        <p><strong>Prompt:</strong> ${prompt}</p>
-        <p>Your generated creative will appear here.</p>
-      </div>
+
+    <div class="card ${
+      selectedFormat === "YouTube Thumbnail"
+      ? "youtube-thumb"
+      : "meta-post"
+    }">
+
+    <h2>${selectedFormat}</h2>
+
+    <p>
+    <strong>Prompt:</strong>
+    ${prompt}
+    </p>
+
+    <p>
+    Creative generation ready.
+    </p>
+
+    </div>
+
     `;
-  }
+
+  };
+
+
+  document.getElementById("unlockBtn").onclick = () => {
+
+    const entered =
+      document.getElementById("adminCode").value;
+
+
+    const status =
+      document.getElementById("adminStatus");
+
+
+    if (entered === ADMIN_CODE) {
+
+      localStorage.setItem(
+        "canvasflow_admin",
+        "true"
+      );
+
+      status.innerHTML =
+      "Admin unlocked ✅";
+
+    } else {
+
+      status.innerHTML =
+      "Invalid code ❌";
+
+    }
+
+  };
+
 
 });
+
+
+if ("serviceWorker" in navigator) {
+
+navigator.serviceWorker.register("sw.js")
+.then(() => console.log("Service Worker Registered"))
+.catch(err => console.log(err));
+
+}
+
 </script>
+
+
+</body>
+</html>
