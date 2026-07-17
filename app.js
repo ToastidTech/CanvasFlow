@@ -141,6 +141,74 @@ function renderInstagram(data) {
 
 
 /* ---------------------------
+   INSTAGRAM OUTPUT
+----------------------------*/
+
+function renderInstagram(data) {
+
+  return `
+
+    <div class="instagram-post">
+
+      <h2>Instagram</h2>
+
+      <h3>
+        ${data.hook}
+      </h3>
+
+      <p>
+        ${data.textOverlay}
+      </p>
+
+      <p>
+        Caption:
+        ${data.mainIdea}
+      </p>
+
+      <small>
+        ${data.cta}
+      </small>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ---------------------------
+   TIKTOK OUTPUT
+----------------------------*/
+
+function renderTikTok(data) {
+
+  return `
+
+    <div class="tiktok-post">
+
+      <h2>TikTok</h2>
+
+      <h3>
+        Hook:
+        ${data.hook}
+      </h3>
+
+      <p>
+        Video Idea:
+        ${data.mainIdea}
+      </p>
+
+      <small>
+        ${data.cta}
+      </small>
+
+    </div>
+
+  `;
+
+}
+
+/* ---------------------------
    MAIN GENERATOR
 ----------------------------*/
 
