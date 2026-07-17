@@ -297,7 +297,28 @@ function generate() {
 
       </div>
       `;
+      break;
 
+    case "both":
+
+    default:
+
+      html = `
+      <div class="split">
+
+        ${renderMeta(data)}
+        ${renderYouTube(data)}
+
+      </div>
+      `;
+
+      break;
+
+  }
+
+  output.innerHTML = html;
+
+}
       
 /* ---------------------------
    INITIALIZATION
