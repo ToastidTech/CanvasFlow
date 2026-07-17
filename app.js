@@ -299,7 +299,7 @@ function generate() {
       `;
       break;
 
-    case "both":
+    case "all":
 
     default:
 
