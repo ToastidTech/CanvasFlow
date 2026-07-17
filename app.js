@@ -277,7 +277,7 @@ function generate() {
       `;
       break;
 
-    case "both":
+        case "both":
 
     default:
 
