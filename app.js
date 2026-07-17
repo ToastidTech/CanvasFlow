@@ -290,7 +290,7 @@ function generate() {
       `;
       break;
 
-    case "all":
+    case "both":
 
     default:
 
@@ -304,7 +304,20 @@ function generate() {
       `;
 
       break;
+case "all":
 
+  html = `
+  <div class="split">
+
+    ${renderMeta(data)}
+    ${renderInstagram(data)}
+    ${renderTikTok(data)}
+    ${renderYouTube(data)}
+
+  </div>
+  `;
+
+  break;
   }
 
   output.innerHTML = html;
