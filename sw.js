@@ -5,15 +5,15 @@
 
 const CACHE_NAME = "canvasflow-v4";
 const ASSETS = [
-  "/",
-  "/index.html",
-  "/app.js",
-  "/templates.js",
-  "/manifest.json",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png",
-  "/icons/icon-maskable-192.png",
-  "/icons/icon-maskable-512.png"
+  "./",
+  "./index.html",
+  "./app.js",
+  "./templates.js",
+  "./manifest.json",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./icons/icon-maskable-192.png",
+  "./icons/icon-maskable-512.png"
 ];
 
 // Install
