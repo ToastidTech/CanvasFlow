@@ -206,7 +206,7 @@ function renderTikTok(data) {
    MAIN GENERATOR
 ----------------------------*/
 
-function generate() {}
+function generate() {
 
   const promptInput =
     document.getElementById("prompt");
@@ -238,55 +238,67 @@ function generate() {}
 
 
   
-  switch (state.mode) {
+    switch (state.mode) {
 
+    case "meta":
 
-case "meta":
+      html = renderMeta(data);
 
-  html = renderMeta(data);
+      break;
 
-  break;
+    case "youtube":
 
+      html = renderYouTube(data);
 
-case "youtube":
+      break;
 
-  html = renderYouTube(data);
+    case "instagram":
 
-  break;
+      html = renderInstagram(data);
 
+      break;
 
-case "instagram":
+    case "tiktok":
 
-  html = renderInstagram(data);
+      html = renderTikTok(data);
 
-  break;
+      break;
 
+    case "all":
 
-case "tiktok":
+      html = `
+      <div class="split">
 
-  html = renderTikTok(data);
+        ${renderMeta(data)}
+        ${renderInstagram(data)}
+        ${renderTikTok(data)}
+        ${renderYouTube(data)}
 
-  break;
+      </div>
+      `;
 
+      break;
 
-case "all":
+    case "both":
 
-  html = `
+    default:
 
-  <div class="split">
+      html = `
+      <div class="split">
 
-    ${renderMeta(data)}
+        ${renderMeta(data)}
+        ${renderYouTube(data)}
 
-    ${renderInstagram(data)}
+      </div>
+      `;
 
-    ${renderTikTok(data)}
+      break;
 
-    ${renderYouTube(data)}
+  }
 
-  </div>
+  output.innerHTML = html;
 
-  `;
-
+}
   break;
 
 
