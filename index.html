@@ -119,63 +119,7 @@
 
 <script src="app.js"></script>
 
-
-    output.innerHTML = `
-
-    <div class="card ${
-      selectedFormat === "YouTube Thumbnail"
-      ? "youtube-thumb"
-      : "meta-post"
-    }">
-
-    <h2>${selectedFormat}</h2>
-
-    <p>
-    <strong>Prompt:</strong>
-    ${prompt}
-    </p>
-
-
-    </div>
-
-    `;
-
-  };
-
-
-  document.getElementById("unlockBtn").onclick = () => {
-
-    const entered =
-      document.getElementById("adminCode").value;
-
-
-    const status =
-      document.getElementById("adminStatus");
-
-
-    if (entered === ADMIN_CODE) {
-
-      localStorage.setItem(
-        "canvasflow_admin",
-        "true"
-      );
-
-      status.innerHTML =
-      "Admin unlocked ✅";
-
-    } else {
-
-      status.innerHTML =
-      "Invalid code ❌";
-
-    }
-
-  };
-
-
-};
-
-
+  
 if ("serviceWorker" in navigator) {
 
 navigator.serviceWorker.register("sw.js")
