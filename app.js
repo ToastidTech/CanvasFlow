@@ -160,7 +160,7 @@ function renderInstagram(data) {
         ${data.mainIdea}
       </p>
 
-      <small>
+            <small>
         ${data.cta}
       </small>
 
@@ -169,7 +169,6 @@ function renderInstagram(data) {
   `;
 
 }
-
 
 /* ---------------------------
    TIKTOK OUTPUT
