@@ -5,7 +5,13 @@
 
 const state = {
   mode: "both",
-  validModes: ["meta", "youtube", "both"],
+  validModes: [
+  "meta",
+  "youtube",
+  "instagram",
+  "tiktok",
+  "all"
+],
   adminUnlocked: localStorage.getItem("canvasflow_admin") === "true"
 };
 
