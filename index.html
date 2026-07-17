@@ -120,40 +120,6 @@
 <script src="app.js"></script>
 
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  const generateBtn = document.getElementById("generateBtn");
-  const output = document.getElementById("output");
-
-  document.getElementById("metaBtn").onclick = () => {
-    selectedFormat = "Meta Feed Post";
-  };
-
-  document.getElementById("youtubeBtn").onclick = () => {
-    selectedFormat = "YouTube Thumbnail";
-  };
-
-
-  generateBtn.onclick = () => {
-
-    const prompt = document
-      .getElementById("prompt")
-      .value
-      .trim();
-
-
-    if (!prompt) {
-
-      output.innerHTML = `
-      <div class="card">
-      Please enter a prompt first.
-      </div>
-      `;
-
-      return;
-    }
-
-
     output.innerHTML = `
 
     <div class="card ${
