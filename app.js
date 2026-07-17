@@ -1,6 +1,7 @@
  /******************************
  * CANVAS FLOW CREATIVE STUDIO
- * Dual Output Engine (Meta + YT)
+ * * Multi Platform Creative Engine
+ * Meta + Instagram + TikTok + YouTube
  ******************************/
 
 const state = {
@@ -283,8 +284,77 @@ function generate() {
   }
 
 
-  output.innerHTML = html;
+  switch (state.mode) {
 
+
+case "meta":
+
+  html = renderMeta(data);
+
+  break;
+
+
+case "youtube":
+
+  html = renderYouTube(data);
+
+  break;
+
+
+case "instagram":
+
+  html = renderInstagram(data);
+
+  break;
+
+
+case "tiktok":
+
+  html = renderTikTok(data);
+
+  break;
+
+
+case "all":
+
+  html = `
+
+  <div class="split">
+
+    ${renderMeta(data)}
+
+    ${renderInstagram(data)}
+
+    ${renderTikTok(data)}
+
+    ${renderYouTube(data)}
+
+  </div>
+
+  `;
+
+  break;
+
+
+case "both":
+
+default:
+
+  html = `
+
+  <div class="split">
+
+    ${renderMeta(data)}
+
+    ${renderYouTube(data)}
+
+  </div>
+
+  `;
+
+  break;
+
+  }
 }
 
 
