@@ -293,6 +293,10 @@ function generate() {
       break;
 
     }
+
+  output.innerHTML = html;
+
+}
       
 /* ---------------------------
    INITIALIZATION
