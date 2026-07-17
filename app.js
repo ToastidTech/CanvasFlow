@@ -1,105 +1,264 @@
-
-/******************************
+ /******************************
  * CANVAS FLOW CREATIVE STUDIO
  * Dual Output Engine (Meta + YT)
  ******************************/
 
 const state = {
   mode: "both",
-  validModes: ["meta", "youtube", "both"]
+  validModes: ["meta", "youtube", "both"],
+  adminUnlocked: localStorage.getItem("canvasflow_admin") === "true"
 };
 
+
+/* ---------------------------
+   MODE CONTROL
+----------------------------*/
+
 function setMode(newMode) {
+
   if (state.validModes.includes(newMode)) {
+
     state.mode = newMode;
+
   } else {
+
     console.warn("Invalid mode:", newMode);
+
   }
+
 }
 
+
 /* ---------------------------
-   CORE CREATIVE ENGINE
+   CREATIVE CORE ENGINE
 ----------------------------*/
+
 function generateCreativeCore(prompt) {
+
   return {
+
     title: prompt || "Untitled Idea",
-    hook: "Stop scrolling. This matters.",
-    mainIdea: "Core message derived from prompt.",
-    visualTheme: "Futuristic electric blue aesthetic",
-    colors: ["#0A84FF", "#000000"],
-    textOverlay: "Build smarter. Move faster.",
-    cta: "Learn more"
+
+    hook:
+      "Stop scrolling. This matters.",
+
+    mainIdea:
+      "Core message derived from prompt.",
+
+    visualTheme:
+      "Futuristic electric blue aesthetic",
+
+    colors:
+      [
+        "#0A84FF",
+        "#000000"
+      ],
+
+    textOverlay:
+      "Build smarter. Move faster.",
+
+    cta:
+      "Learn more"
+
   };
+
 }
 
+
 /* ---------------------------
-   META RENDER
+   META OUTPUT
 ----------------------------*/
+
 function renderMeta(data) {
+
   return `
+
     <div class="meta-post">
+
       <h2>${data.title}</h2>
-      <p><strong>${data.hook}</strong></p>
-      <p>${data.textOverlay}</p>
-      <small>${data.cta}</small>
+
+      <p>
+        <strong>
+          ${data.hook}
+        </strong>
+      </p>
+
+      <p>
+        ${data.textOverlay}
+      </p>
+
+      <small>
+        ${data.cta}
+      </small>
+
     </div>
+
   `;
+
 }
 
+
 /* ---------------------------
-   YOUTUBE RENDER
+   YOUTUBE OUTPUT
 ----------------------------*/
+
 function renderYouTube(data) {
+
   return `
+
     <div class="youtube-thumb">
-      <h1>${data.hook}</h1>
-      <p>${data.textOverlay}</p>
-      <span>${data.cta}</span>
+
+      <h1>
+        ${data.hook}
+      </h1>
+
+      <p>
+        ${data.textOverlay}
+      </p>
+
+      <span>
+        ${data.cta}
+      </span>
+
     </div>
+
   `;
+
 }
 
-/* ---------------------------
-   MAIN GENERATION (DUAL OUTPUT)
-----------------------------*/
-function generate() {
-  const prompt = document.getElementById("prompt").value;
-  const output = document.getElementById("output");
 
-  const data = generateCreativeCore(prompt);
-  const mode = state.mode;
+/* ---------------------------
+   MAIN GENERATOR
+----------------------------*/
+
+function generate() {
+
+  const promptInput =
+    document.getElementById("prompt");
+
+  const output =
+    document.getElementById("output");
+
+
+  if (!promptInput || !output) {
+
+    console.error(
+      "CanvasFlow elements missing."
+    );
+
+    return;
+
+  }
+
+
+  const prompt =
+    promptInput.value.trim();
+
+
+  const data =
+    generateCreativeCore(prompt);
+
 
   let html = "";
 
-  if (mode === "meta") {
-    html = renderMeta(data);
+
+  switch (state.mode) {
+
+
+    case "meta":
+
+      html =
+        renderMeta(data);
+
+      break;
+
+
+    case "youtube":
+
+      html =
+        renderYouTube(data);
+
+      break;
+
+
+    case "both":
+
+    default:
+
+      html = `
+
+        <div class="split">
+
+          ${renderMeta(data)}
+
+          ${renderYouTube(data)}
+
+        </div>
+
+      `;
+
+      break;
+
   }
 
-  if (mode === "youtube") {
-    html = renderYouTube(data);
-  }
-
-  if (mode === "both") {
-    html = `
-      <div class="split">
-        ${renderMeta(data)}
-        ${renderYouTube(data)}
-      </div>
-    `;
-  }
 
   output.innerHTML = html;
 
 }
 
-/* ---------------------------
-   EVENT BINDING
-----------------------------*/
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("generateBtn").onclick = generate;
 
-  document.getElementById("metaBtn").onclick = () => setMode("meta");
-  document.getElementById("youtubeBtn").onclick = () => setMode("youtube");
+/* ---------------------------
+   INITIALIZATION
+----------------------------*/
+
+document.addEventListener(
+"DOMContentLoaded",
+() => {
+
+
+  const generateBtn =
+    document.getElementById(
+      "generateBtn"
+    );
+
+
+  const metaBtn =
+    document.getElementById(
+      "metaBtn"
+    );
+
+
+  const youtubeBtn =
+    document.getElementById(
+      "youtubeBtn"
+    );
+
+
+  if (generateBtn) {
+
+    generateBtn.onclick =
+      generate;
+
+  }
+
+
+  if (metaBtn) {
+
+    metaBtn.onclick =
+      () => setMode("meta");
+
+  }
+
+
+  if (youtubeBtn) {
+
+    youtubeBtn.onclick =
+      () => setMode("youtube");
+
+  }
+
 
   setMode("both");
+
+
 });
