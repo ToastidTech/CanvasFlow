@@ -3,7 +3,7 @@
 // Isolated cache, no cross-app bleed
 // ===============================
 
-const CACHE_NAME = "canvasflow-v4";
+const CACHE_NAME = "canvasflow-v5";
 const ASSETS = [
   "./",
   "./index.html",
