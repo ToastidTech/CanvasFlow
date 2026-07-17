@@ -197,19 +197,10 @@ function renderTikTok(data) {
       </small>
 
     </div>
-      break;
 
-    case "both":
+  `;
 
-    default:
-
-      html = `
-      <div class="split">
-
-        ${renderMeta(data)}
-        ${renderYouTube(data)}
-
-      </div>
+}
       `;
 
       break;
