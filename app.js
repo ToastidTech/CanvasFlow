@@ -324,7 +324,38 @@ document.addEventListener(
       "youtubeBtn"
     );
 
+const instagramBtn =
+  document.getElementById("instagramBtn");
 
+const tiktokBtn =
+  document.getElementById("tiktokBtn");
+
+const allBtn =
+  document.getElementById("allBtn");
+
+
+if (instagramBtn) {
+
+  instagramBtn.onclick =
+    () => setMode("instagram");
+
+}
+
+
+if (tiktokBtn) {
+
+  tiktokBtn.onclick =
+    () => setMode("tiktok");
+
+}
+
+
+if (allBtn) {
+
+  allBtn.onclick =
+    () => setMode("all");
+
+}
   if (generateBtn) {
 
     generateBtn.onclick =
