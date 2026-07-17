@@ -196,23 +196,6 @@ function renderTikTok(data) {
       <small>
         ${data.cta}
       </small>
-
-    </div>
-
-  `;
-
-}
-      `;
-
-      break;
-
-  }
-
-  output.innerHTML = html;
-
-}
-  `;
-
 }
 
 /* ---------------------------
