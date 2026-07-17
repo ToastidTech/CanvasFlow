@@ -108,23 +108,30 @@ function renderMeta(data) {
    YOUTUBE OUTPUT
 ----------------------------*/
 
-function renderYouTube(data) {
+function renderInstagram(data) {
 
   return `
 
-    <div class="youtube-thumb">
+    <div class="instagram-post">
 
-      <h1>
+      <h2>Instagram</h2>
+
+      <h3>
         ${data.hook}
-      </h1>
+      </h3>
 
       <p>
         ${data.textOverlay}
       </p>
 
-      <span>
+      <p>
+        Caption:
+        ${data.mainIdea}
+      </p>
+
+      <small>
         ${data.cta}
-      </span>
+      </small>
 
     </div>
 
