@@ -2,7 +2,7 @@
   "name": "Canvas Flow - by Toastid Tech, LLC",
   "short_name": "Canvas Flow",
   "description": "Graphic design made simple. Create stunning visuals right in your browser.",
-  "start_url": "./index.html",
+  "start_url": "./.",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
