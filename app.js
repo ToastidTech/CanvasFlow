@@ -109,30 +109,23 @@ function renderMeta(data) {
    YOUTUBE OUTPUT
 ----------------------------*/
 
-function renderInstagram(data) {
+function renderYouTube(data) {
 
   return `
 
-    <div class="instagram-post">
+    <div class="youtube-thumb">
 
-      <h2>Instagram</h2>
-
-      <h3>
+      <h1>
         ${data.hook}
-      </h3>
+      </h1>
 
       <p>
         ${data.textOverlay}
       </p>
 
-      <p>
-        Caption:
-        ${data.mainIdea}
-      </p>
-
-      <small>
+      <span>
         ${data.cta}
-      </small>
+      </span>
 
     </div>
 
@@ -213,7 +206,7 @@ function renderTikTok(data) {
    MAIN GENERATOR
 ----------------------------*/
 
-function generate() {
+function generate() {}
 
   const promptInput =
     document.getElementById("prompt");
@@ -244,46 +237,7 @@ function generate() {
   let html = "";
 
 
-  switch (state.mode) {
-
-
-    case "meta":
-
-      html =
-        renderMeta(data);
-
-      break;
-
-
-    case "youtube":
-
-      html =
-        renderYouTube(data);
-
-      break;
-
-
-    case "both":
-
-    default:
-
-      html = `
-
-        <div class="split">
-
-          ${renderMeta(data)}
-
-          ${renderYouTube(data)}
-
-        </div>
-
-      `;
-
-      break;
-
-  }
-
-
+  
   switch (state.mode) {
 
 
