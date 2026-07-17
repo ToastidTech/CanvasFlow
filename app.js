@@ -11,6 +11,7 @@ const state = {
   "youtube",
   "instagram",
   "tiktok",
+  "both",
   "all"
 ],
   adminUnlocked: localStorage.getItem("canvasflow_admin") === "true"
