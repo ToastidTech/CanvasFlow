@@ -213,7 +213,8 @@ function generate() {
   const output =
     document.getElementById("output");
 
-
+console.log("promptInput:", promptInput);
+console.log("output:", output);
   if (!promptInput || !output) {
 
     console.error(
