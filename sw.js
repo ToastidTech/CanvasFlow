@@ -44,21 +44,46 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Fetch strategy (safe cache-first for static assets)
+// Fetch strategy
+// Fresh code first, cached assets first
 self.addEventListener("fetch", (event) => {
   const req = event.request;
 
-  event.respondWith(
-    caches.match(req).then((cached) => {
-      return (
-        cached ||
-        fetch(req).then((res) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(req, res.clone());
-            return res;
+  const isAppCode =
+    req.url.includes("index.html") ||
+    req.url.includes("app.js") ||
+    req.url.includes("templates.js");
+
+  if (isAppCode) {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          const copy = res.clone();
+
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(req, copy);
           });
+
+          return res;
         })
-      );
-    })
-  );
+        .catch(() => caches.match(req))
+    );
+  } else {
+    event.respondWith(
+      caches.match(req).then((cached) => {
+        return (
+          cached ||
+          fetch(req).then((res) => {
+            const copy = res.clone();
+
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(req, copy);
+            });
+
+            return res;
+          })
+        );
+      })
+    );
+  }
 });
