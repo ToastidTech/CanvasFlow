@@ -229,10 +229,6 @@ function generate() {
     promptInput.value.trim();
 
 
-  const data =
-    generateCreativeCore(prompt);
-
-
   let html = "";
 
 
