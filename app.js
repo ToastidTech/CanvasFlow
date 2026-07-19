@@ -377,7 +377,7 @@ if (allBtn) {
   }
 
 
-  setMode("both");
+  setMode("all");
 
 
 });
