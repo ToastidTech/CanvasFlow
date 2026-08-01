@@ -4,7 +4,7 @@
 // Bump CACHE_NAME every time index.html/unlock.html/manifest.json changes
 // ===============================
 
-const CACHE_NAME = "canvasflow-v1"; // rebuild — reset from prior broken repo's v7
+const CACHE_NAME = "canvasflow-v2"; // rebuild — reset from prior broken repo's v7
 const ASSETS = [
   "./",
   "./index.html",
