@@ -1,7 +1,7 @@
 {
-  "name": "Canvas Flow - by Toastid Tech, LLC",
-  "short_name": "Canvas Flow",
-  "description": "Graphic design made simple. Create stunning visuals right in your browser.",
+  "name": "CanvasFlow - by Toastid Tech, LLC",
+  "short_name": "CanvasFlow",
+  "description": "8 professional design tools — palette, contrast, gradients, type scale, canvas sizes, shadows, image resize, unit convert — right in your browser.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
