@@ -1,48 +1,38 @@
 # CanvasFlow
 **by Toastid Tech, LLC** — "Don't Get Left Behind."
 
-A self-contained graphic design PWA. Drag-and-drop shapes, text, and images onto a canvas, pick from templates, and export PNGs — all running client-side with no backend required.
+Eight professional design tools in one PWA: Palette Studio, Contrast Check, Gradient Forge, Type Scale, Canvas Sizes, Shadow & Radius, Image Resize, and Unit Convert. Everything runs client-side — no backend, no accounts.
+
+## Rebuild note
+The previous `index.html`/`app.js`/`templates.js` in this repo were an unrelated prototype (a Meta/Instagram/TikTok content-idea generator) that ended up here by mistake — not CanvasFlow. This is a full rebuild as a single-file app. `unlock.html`, `manifest.json`, and the icon set from the old build were on-brand and reusable, so they carried over; everything else is new.
 
 ## Offer
-- **7-day free trial**, full feature access, exports carry a "Toastid Tech, LLC" watermark
-- **$29.95 one-time unlock** → removes watermark, full access on that device
+- **7-day free trial** — full access to all 8 tools, no gating on the tools themselves
+- Copied CSS/JSON and downloaded images carry a small "CanvasFlow — Toastid Tech, LLC" credit until unlocked
+- **$29.95 one-time unlock** → removes the credit, permanent on that device
+- Promo code `TST2026` → permanent unlock
+- Beta code `BEAR2WK` → extends the trial window 14 days (does not remove the credit)
 
 ## Files in this repo
 | File | Purpose |
 |---|---|
-| `index.html` | App shell, layout, all styles, splash screen |
-| `app.js` | Editor logic, trial/unlock system, export, canvas interaction |
-| `templates.js` | Starter design templates (add more here) |
-| `unlock.html` | Post-checkout redirect page — sets the unlock flag |
+| `index.html` | Everything — shell, styles, all 8 tools' UI and logic, trial/unlock system |
+| `unlock.html` | Post-checkout redirect — sets `cf_unlocked=true`, then returns to the app |
 | `manifest.json` | PWA manifest |
 | `sw.js` | Service worker for offline caching |
 | `icons/` | App icons + logo |
 
 ## ✅ Already set up
-- Icon set + top bar logo (`icons/`)
-- Splash screen (mark + "CanvasFlow" + "by Toastid Tech, LLC") on load
-- Square checkout link wired into `app.js`: `https://square.link/u/8Y2zQGoR`
-- `unlock.html` redirect page
+- All 8 tools, each genuinely interactive (draggable gradient stops, live WCAG badges, true-size type specimens, client-side canvas image resize, etc.)
+- 7-day trial + unlock system in `localStorage`, wired to promo/beta codes
+- Square checkout link: `https://square.link/u/8Y2zQGoR`
+- `unlock.html` redirect page, on-brand and functional
 
 ## TODO before launch
-1. **Point Square's "after payment" redirect to `unlock.html`**
-   In your Square payment link settings, set the post-purchase redirect URL to:
-   ```
-   https://<your-domain>/canvasflow/unlock.html
-   ```
-   When a customer completes checkout, they land on `unlock.html`, which sets `cf_unlocked=true` in localStorage and redirects them back to `index.html` — full access, no watermark, no console commands needed.
-
-   ⚠️ Caveat: this only works if the customer completes checkout in the **same browser/device** as the app (localStorage is device-bound, no accounts). If Square opens checkout in a different browser context, the flag won't transfer. Test this end-to-end before relying on it.
-
-2. **Bump `CACHE_VERSION` in `sw.js`** every time you push updates to `index.html`/`app.js`/`templates.js`/`unlock.html`, or returning users will see stale cached versions. Currently at `canvasflow-v2`.
-
-3. **Deploy to GitHub Pages** (standard Toastid Tech flow):
-   - Push to `toastidtech.github.io/canvasflow` or a dedicated repo with Pages enabled
-   - Confirm `manifest.json` and icon paths resolve correctly under your Pages subpath
-   - Test the unlock redirect link with the live URL once deployed
+1. **Point Square's "after payment" redirect to `unlock.html`**, same caveat as always: this only works if checkout completes in the same browser/device as the app (no accounts, `localStorage` is device-bound). Test end-to-end before relying on it.
+2. **Bump `CACHE_NAME` in `sw.js`** every time you push updates to `index.html` or `unlock.html`, or returning users will see stale cached versions. Currently at `canvasflow-v1` (reset from the old broken repo's v7 — this is a new codebase).
+3. **Deploy to GitHub Pages**, confirm `manifest.json` and icon paths resolve under your Pages subpath, then test the live unlock redirect.
 
 ## Notes
-- All project data (current design + unlock status + trial start date) is stored in `localStorage` — device-specific, no accounts/backend.
-- "Unlock" = `cf_unlocked` flag in localStorage. Trial start = `cf_first_launch` timestamp, checked against `cf_first_launch + 7 days`.
-- Manual unlock fallback still available via browser console: `unlockCanvasFlow()` — useful for support/testing.
-- Add new templates by appending objects to the `TEMPLATES` array in `templates.js` — follow the existing shape.
+- All state (unlock status, trial start, last tool viewed) lives in `localStorage` — device-specific, no accounts.
+- To retire `TST2026`, note that anyone who already redeemed it keeps `cf_unlocked=true` permanently (the flag persists locally); retiring only blocks *new* redemptions of that code.
