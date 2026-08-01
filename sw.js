@@ -1,14 +1,14 @@
 // ===============================
-// Canvas Flow Service Worker (CLEAN)
+// CanvasFlow Service Worker
 // Isolated cache, no cross-app bleed
+// Bump CACHE_NAME every time index.html/unlock.html/manifest.json changes
 // ===============================
 
-const CACHE_NAME = "canvasflow-v7";
+const CACHE_NAME = "canvasflow-v1"; // rebuild — reset from prior broken repo's v7
 const ASSETS = [
   "./",
   "./index.html",
-  "./app.js",
-  "./templates.js",
+  "./unlock.html",
   "./manifest.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
@@ -16,74 +16,46 @@ const ASSETS = [
   "./icons/icon-maskable-512.png"
 ];
 
-// Install
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS);
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
-
   self.skipWaiting();
 });
 
-// Activate (hard cleanup old caches)
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
-      );
-    })
+    caches.keys().then((keys) =>
+      Promise.all(keys.map((key) => key !== CACHE_NAME ? caches.delete(key) : null))
+    )
   );
-
   self.clients.claim();
 });
 
-// Fetch strategy
-// Fresh code first, cached assets first
+// Fresh app code first (falls back to cache if offline); cache-first for static assets
 self.addEventListener("fetch", (event) => {
   const req = event.request;
-
-  const isAppCode =
-    req.url.includes("index.html") ||
-    req.url.includes("app.js") ||
-    req.url.includes("templates.js");
+  const isAppCode = req.url.includes("index.html") || req.url.includes("unlock.html") || req.url.endsWith("/");
 
   if (isAppCode) {
     event.respondWith(
       fetch(req)
         .then((res) => {
           const copy = res.clone();
-
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(req, copy);
-          });
-
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
           return res;
         })
         .catch(() => caches.match(req))
     );
   } else {
     event.respondWith(
-      caches.match(req).then((cached) => {
-        return (
-          cached ||
-          fetch(req).then((res) => {
-            const copy = res.clone();
-
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(req, copy);
-            });
-
-            return res;
-          })
-        );
-      })
+      caches.match(req).then((cached) =>
+        cached || fetch(req).then((res) => {
+          const copy = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+          return res;
+        })
+      )
     );
   }
 });
